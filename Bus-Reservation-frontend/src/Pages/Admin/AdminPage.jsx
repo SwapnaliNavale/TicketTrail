@@ -9,6 +9,8 @@ import AddRoute from "./Components/AddRoute";
 import AddSchedule from "./Components/AddSchedules";
 
 import UserTickets from "./Components/UserTickets";
+import ManageUserDetails from "./Components/ManageUserDetails";
+import Dashboard from "./Components/Dashboard";
 
 const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -99,9 +101,11 @@ const AdminLayout = () => {
 const AdminPageWithRouter = () => (
   <Routes>
     <Route path="/" element={<AdminLayout />}>
+      <Route index element={<Dashboard/>}/>
       <Route path="add-bus" element={<AddBus />} />
       <Route path="add-route" element={<AddRoute />} />
-
+      <Route path="tickets" element={<ManageTickets />} />
+      <Route path="users" element={<ManageUserDetails/>}/>
       <Route path="add-schedule" element={<AddSchedule />} />
       <Route path="edit-user/:userId" element={<EditUserDetails />} />
       {/* <Route path="user-tickets/:userId" element={<UserTicketList />} /> */}
