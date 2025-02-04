@@ -1,0 +1,47 @@
+.active {
+    opacity: 1; /* Make the active image fully visible */
+  }
+  
+  .active:not(:first-child) {
+    animation: slideIn 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .active {
+    opacity: 1;
+  }
+  
+  .active:not(:first-child) {
+    animation: slideIn 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .carousel-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth; 
+  }
+
+  .carousel-control {
+    background-color: #007bff; 
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+  }
