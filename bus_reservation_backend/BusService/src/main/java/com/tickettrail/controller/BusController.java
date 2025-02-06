@@ -36,7 +36,7 @@ public class BusController {
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<BusResponseDTO>> getBus(@PathVariable Long id) {
-        return ResponseEntity.ok(new ApiResponse<>(busService.getBus(id), "SUCCESS"));
+    	return ResponseEntity.ok(ApiResponse.success(busService.getBus(id)));
     }
 
     @PutMapping("/{id}")

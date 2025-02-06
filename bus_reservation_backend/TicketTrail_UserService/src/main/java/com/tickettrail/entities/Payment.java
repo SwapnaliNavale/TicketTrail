@@ -5,6 +5,7 @@ import java.time.LocalTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -40,9 +41,9 @@ public class Payment extends BaseEntity {
 	
 	
 	//payment is associated with ticket (ticket 1 ----> 1 payment)
-	@OneToOne
-	//@JoinColumn(name="ticket_id")
-	private Ticket ticket;
+	@OneToOne(fetch = FetchType.EAGER) // Default for @OneToOne, but explicit is good
+    @JoinColumn(name = "ticketId", unique = true)
+    private Ticket ticket;
 
 
 	public Payment(LocalDate paymentDate, double amount, PaymentMethod paymentMethod, boolean isSucessfull,

@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
 	            .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
 	    
 	    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-	            .body(new ApiResponse<>(errors, "error"));
+	            .body(ApiResponse.error("error", errors)); // Correct constructor
 	}
 	
 	

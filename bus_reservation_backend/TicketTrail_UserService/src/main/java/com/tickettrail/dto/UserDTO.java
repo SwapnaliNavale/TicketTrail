@@ -2,12 +2,9 @@ package com.tickettrail.dto;
 
 import java.time.LocalDate;
 
-import org.hibernate.validator.constraints.Range;
-
 import com.tickettrail.entities.Address;
 import com.tickettrail.entities.Gender;
 import com.tickettrail.entities.UserRole;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -56,4 +53,6 @@ public class UserDTO {
 	
 	@NotNull
 	private UserRole role= UserRole.ROLE_CUSTOMER;
+	
+	
 }

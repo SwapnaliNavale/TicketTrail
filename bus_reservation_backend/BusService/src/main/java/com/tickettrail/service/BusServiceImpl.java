@@ -23,7 +23,7 @@ public class BusServiceImpl implements BusService {
 		 Bus bus = new Bus();
 	        bus.setBusNo(requestDTO.getBusNo());
 	        bus.setCapacity(requestDTO.getCapacity());
-	        bus.setUserId(requestDTO.getUserId());
+	        bus.setAdminId(requestDTO.getUserId());
 	        bus.setSchedule(requestDTO.getSchedule());
 	        busRepository.save(bus);
 
@@ -32,7 +32,7 @@ public class BusServiceImpl implements BusService {
 	@Override
 	public BusResponseDTO getBus(Long id) {
 		Optional<Bus> bus = busRepository.findById(id);
-        return bus.map(value -> new BusResponseDTO(value.getId(), value.getBusNo(), value.getCapacity(), value.getUserId(), value.getSchedule())).orElse(null);
+        return bus.map(value -> new BusResponseDTO(value.getId(), value.getBusNo(), value.getCapacity(), value.getAdminId(), value.getSchedule())).orElse(null);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class BusServiceImpl implements BusService {
 		 Bus bus = busRepository.findById(id).orElseThrow(() -> new RuntimeException("Bus not found"));
 	        bus.setBusNo(requestDTO.getBusNo());
 	        bus.setCapacity(requestDTO.getCapacity());
-	        bus.setUserId(requestDTO.getUserId());
+	        bus.setAdminId(requestDTO.getUserId());
 	        bus.setSchedule(requestDTO.getSchedule());
 	        busRepository.save(bus);
 

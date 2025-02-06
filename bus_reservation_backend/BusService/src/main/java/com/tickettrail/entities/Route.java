@@ -1,9 +1,12 @@
 package com.tickettrail.entities;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +33,9 @@ public class Route extends BaseEntity {
 	 
 	 @Column(nullable = false)
 	private LocalTime duration;
+	 
+	 @OneToMany(mappedBy = "route", fetch = FetchType.LAZY) // Important: LAZY for 1:N
+	    private List<Schedule> schedules; // Schedules for this route
 
 	public Route(String source, String destination, Long distance, LocalTime duration) {
 		super();

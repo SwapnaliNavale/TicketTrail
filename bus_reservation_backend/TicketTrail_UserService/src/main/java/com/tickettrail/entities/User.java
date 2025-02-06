@@ -26,7 +26,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(callSuper = true, exclude = { "password", "tickets","userAddress" })
+@ToString(callSuper = true, exclude = { "password", "tickets","userAddress", "notifications", "buses"})
 public class User extends BaseEntity {
 	
 	@Column(name = "first_name", length = 20) // column name , varchar(20)
@@ -70,8 +70,16 @@ public class User extends BaseEntity {
 
   //User can book multiple tickets (ticket *<--->1 User)  option bi_directional
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
-
+    private List<Ticket> bookedTickets;
+    
+    //User 1:N Notifications
+    @OneToMany(mappedBy = "user")
+    private List<Notification> notifications;
+    
+    // User 1:N Buses (as Admin)
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Bus> managedBuses;
+    
 public User(String firstName, String lastName, String email, String password, String confirmPassword, LocalDate dob,
 		Long mobileNo, int age, Gender gender, Address userAddress) {
 	super();
@@ -86,7 +94,9 @@ public User(String firstName, String lastName, String email, String password, St
 	this.isActive = true;
 	this.gender = gender;
 	this.userAddress = userAddress;
-	this.tickets = new ArrayList<>();
+	this.bookedTickets = new ArrayList<>();
+	this.notifications= new ArrayList<>();
+	this.managedBuses= new ArrayList<>();
 }
 
 	

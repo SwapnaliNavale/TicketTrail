@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -38,29 +39,27 @@ public class Ticket extends BaseEntity {
 	private boolean isBooked;
 
 	//Ticket is associated with one schedule ( ticket *--->1 schedule)
-	@ManyToOne
-	@JoinColumn(name="schedule_id")
+	@ManyToOne(fetch = FetchType.EAGER) // Default for @ManyToOne, but explicit is good
+	@JoinColumn(name="scheduleId")
 	private Schedule schedule;
 	
 	//User can book multiple tickets (ticket *<--->1 User)  option bi_directional
-//	@ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false)  // Ensure this column exists in the DB
+	@Column(name = "user_id") // Store User ID, not the entity
     private Long userId;
 
-//	//payment is associated with ticket (ticket 1 ----> 1 payment)
-//	@OneToOne
-//	@JoinColumn(name="payment_id")
-	private Long paymentId;
-
-	public Ticket(LocalDate bookDate, int seatNo, double price, boolean isBooked, Schedule schedule, Long user,
-			Long paymentId) {
+	//payment is associated with ticket (ticket 1 ----> 1 payment)
+	@Column(name = "payment_id") // Store Payment ID, not the entity
+    private Long paymentId;
+	
+	public Ticket(LocalDate bookDate, int seatNo, double price, boolean isBooked, Schedule schedule) {
 		super();
 		this.bookDate = bookDate;
 		this.seatNo = seatNo;
 		this.price = price;
 		this.isBooked = isBooked;
 		this.schedule = schedule;
-		this.userId = user;
-		this.paymentId = paymentId;
 	}
+	
+	
+	
 }

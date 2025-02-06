@@ -2,6 +2,7 @@ package com.tickettrail.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -28,9 +29,9 @@ public class Notification extends BaseEntity {
 	private String notification_type= "email"; // notification via email
 	
 	//user can have multiple notifications ( notification *----->1 User)
-	@ManyToOne
-	@JoinColumn(name= "user_id")
-	private User user;
+	 @ManyToOne(fetch = FetchType.EAGER) // Default for @ManyToOne, but explicit is good
+	    @JoinColumn(name = "userId")
+	    private User user;
 
 	public Notification(String message, String notification_type, User user) {
 		super();

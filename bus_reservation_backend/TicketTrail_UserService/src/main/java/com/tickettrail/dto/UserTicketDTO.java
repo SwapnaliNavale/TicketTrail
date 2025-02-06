@@ -1,15 +1,15 @@
-package com.tickettrail.dtos;
+package com.tickettrail.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.tickettrail.entities.Address;
+import com.tickettrail.entities.Gender;
+import com.tickettrail.entities.UserRole;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,7 +17,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserDTO extends BaseDTO {
+public class UserTicketDTO extends BaseDTO {
 	@NotBlank
 	private String firstName;
 	private String lastName;
@@ -41,8 +41,11 @@ public class UserDTO extends BaseDTO {
 	private Gender gender;
 
 	
-	private AddressDTO userAddress;
+	private Address userAddress;
 	
 	
 	private UserRole role= UserRole.ROLE_CUSTOMER;
+	
+	@JsonProperty(access = Access.READ_ONLY)
+	List<TicketResponseDTO> ticekts;
 }
