@@ -1,4 +1,4 @@
-package com.bus.security;
+package com.tickettrail.security;
 
 
 	import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bus.entities.User;
-import com.bus.repositories.UserRepository;
+import com.tickettrail.entities.User;
+import com.tickettrail.repositories.UserRepository;
 
 
 	@Service

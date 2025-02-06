@@ -1,4 +1,4 @@
-package com.bus.entities;
+package com.tickettrail.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

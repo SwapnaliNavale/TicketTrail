@@ -1,4 +1,4 @@
-package com.bus.custom_exception_handler;
+package com.tickettrail.custom_exception_handler;
 
 import java.util.List;
 import java.util.Map;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.bus.custom_exceptions.ResourceNotFoundException;
-import com.bus.dto.ApiResponse;
+import com.tickettrail.custom_exceptions.ResourceNotFoundException;
+import com.tickettrail.dto.ApiResponse;
 
 @RestControllerAdvice // =@ControllerAdvice => global exc handler class
 //--common interceptor to intercept ALL excs in all contoller + @ResponseBody added impl. 

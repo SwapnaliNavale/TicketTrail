@@ -1,12 +1,12 @@
-package com.bus.dto;
+package com.tickettrail.dto;
 
 import java.time.LocalDate;
 
 import org.hibernate.validator.constraints.Range;
 
-import com.bus.entities.Address;
-import com.bus.entities.Gender;
-import com.bus.entities.UserRole;
+import com.tickettrail.entities.Address;
+import com.tickettrail.entities.Gender;
+import com.tickettrail.entities.UserRole;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

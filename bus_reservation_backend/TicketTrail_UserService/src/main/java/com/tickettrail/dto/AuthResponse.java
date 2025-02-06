@@ -1,4 +1,4 @@
-package com.bus.dto;
+package com.tickettrail.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

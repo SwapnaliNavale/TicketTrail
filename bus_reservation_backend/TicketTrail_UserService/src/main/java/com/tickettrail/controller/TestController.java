@@ -1,4 +1,4 @@
-package com.bus.controller;
+package com.tickettrail.controller;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.bus.security;
+package com.tickettrail.security;
 
 
 
@@ -9,7 +9,7 @@ package com.bus.security;
 	import org.springframework.security.core.authority.SimpleGrantedAuthority;
 	import org.springframework.security.core.userdetails.UserDetails;
 
-import com.bus.entities.User;
+import com.tickettrail.entities.User;
 
 	
 

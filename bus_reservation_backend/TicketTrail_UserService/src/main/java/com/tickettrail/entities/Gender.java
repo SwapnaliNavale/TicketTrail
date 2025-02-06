@@ -1,4 +1,4 @@
-package com.bus.entities;
+package com.tickettrail.entities;
 
 public enum Gender {
 	MALE, FEMALE, OTHER

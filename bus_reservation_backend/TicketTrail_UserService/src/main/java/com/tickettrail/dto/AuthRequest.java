@@ -1,4 +1,4 @@
-package com.bus.dto;
+package com.tickettrail.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

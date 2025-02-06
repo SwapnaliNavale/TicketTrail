@@ -1,4 +1,4 @@
-package com.bus.custom_exceptions;
+package com.tickettrail.custom_exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
 	public ResourceNotFoundException(String mesg) {
