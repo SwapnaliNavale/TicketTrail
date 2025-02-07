@@ -1,7 +1,7 @@
 package com.tickettrail.service;
 
-import com.tickettrail.dtos.BusRequestDTO;
-import com.tickettrail.dtos.BusResponseDTO;
+import com.tickettrail.dto.BusRequestDTO;
+import com.tickettrail.dto.BusResponseDTO;
 
 
 public interface BusService {

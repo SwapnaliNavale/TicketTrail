@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tickettrail.dtos.ApiResponse;
-import com.tickettrail.dtos.BusRequestDTO;
-import com.tickettrail.dtos.BusResponseDTO;
+import com.tickettrail.dto.ApiResponse;
+import com.tickettrail.dto.BusRequestDTO;
+import com.tickettrail.dto.BusResponseDTO;
 import com.tickettrail.service.BusService;
 
 import lombok.RequiredArgsConstructor;

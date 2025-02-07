@@ -1,4 +1,4 @@
-package com.tickettrail.dtos;
+package com.tickettrail.dto;
 
 import java.time.LocalDateTime;
 

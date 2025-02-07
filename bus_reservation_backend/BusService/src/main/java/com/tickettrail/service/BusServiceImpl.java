@@ -5,10 +5,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tickettrail.dtos.BusRequestDTO;
-import com.tickettrail.dtos.BusResponseDTO;
+import com.tickettrail.dto.BusRequestDTO;
+import com.tickettrail.dto.BusResponseDTO;
 import com.tickettrail.entities.Bus;
-import com.tickettrail.repositories.busRepository;
+import com.tickettrail.repository.BusRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -16,7 +16,7 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class BusServiceImpl implements BusService {
 	@Autowired
-	private busRepository busRepository;
+	private BusRepository BusRepository;
 
 	@Override
 	public void addBus(BusRequestDTO requestDTO) {
@@ -25,30 +25,30 @@ public class BusServiceImpl implements BusService {
 	        bus.setCapacity(requestDTO.getCapacity());
 	        bus.setAdminId(requestDTO.getUserId());
 	        bus.setSchedule(requestDTO.getSchedule());
-	        busRepository.save(bus);
+	        BusRepository.save(bus);
 
 	}
 
 	@Override
 	public BusResponseDTO getBus(Long id) {
-		Optional<Bus> bus = busRepository.findById(id);
+		Optional<Bus> bus = BusRepository.findById(id);
         return bus.map(value -> new BusResponseDTO(value.getId(), value.getBusNo(), value.getCapacity(), value.getAdminId(), value.getSchedule())).orElse(null);
 	}
 
 	@Override
 	public void updateBus(Long id, BusRequestDTO requestDTO) {
-		 Bus bus = busRepository.findById(id).orElseThrow(() -> new RuntimeException("Bus not found"));
+		 Bus bus = BusRepository.findById(id).orElseThrow(() -> new RuntimeException("Bus not found"));
 	        bus.setBusNo(requestDTO.getBusNo());
 	        bus.setCapacity(requestDTO.getCapacity());
 	        bus.setAdminId(requestDTO.getUserId());
 	        bus.setSchedule(requestDTO.getSchedule());
-	        busRepository.save(bus);
+	        BusRepository.save(bus);
 
 	}
 
 	@Override
 	public void deleteBus(Long id) {
-		busRepository.deleteById(id);
+		BusRepository.deleteById(id);
 
 	}
 

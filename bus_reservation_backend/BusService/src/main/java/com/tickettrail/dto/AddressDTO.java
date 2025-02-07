@@ -1,4 +1,4 @@
-package com.tickettrail.dtos;
+package com.tickettrail.dto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

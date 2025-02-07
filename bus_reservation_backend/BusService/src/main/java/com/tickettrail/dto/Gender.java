@@ -1,4 +1,4 @@
-package com.tickettrail.dtos;
+package com.tickettrail.dto;
 
 public enum Gender {
 	MALE, FEMALE, OTHER

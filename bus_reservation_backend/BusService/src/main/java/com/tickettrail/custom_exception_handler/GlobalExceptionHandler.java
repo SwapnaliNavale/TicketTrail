@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.tickettrail.custom_exceptions.ResourceNotFoundException;
-import com.tickettrail.dtos.ApiResponse;
+import com.tickettrail.dto.ApiResponse;
 
 @RestControllerAdvice // =@ControllerAdvice => global exc handler class
 //--common interceptor to intercept ALL excs in all contoller + @ResponseBody added impl. 
