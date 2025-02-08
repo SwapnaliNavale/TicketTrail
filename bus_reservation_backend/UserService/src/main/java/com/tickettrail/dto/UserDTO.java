@@ -52,7 +52,7 @@ public class UserDTO {
 	private Address userAddress;
 	
 	@NotNull
-	private UserRole role= UserRole.ROLE_CUSTOMER;
+	private UserRole role= UserRole.ROLE_ADMIN;
 	
 	
 }
