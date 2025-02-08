@@ -36,8 +36,8 @@ const Mylogin = () => {
 
         // After successful authentication, dynamically navigate to homepage
          // Conditional navigation based on role
-        if (userRole === "admin") {
-          navigate("/admin-home");
+        if (userRole === "ROLE_ADMIN") {
+          navigate("/admin");
         } else {
           navigate("/");
         }

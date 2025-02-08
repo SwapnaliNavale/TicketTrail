@@ -1,4 +1,4 @@
-import { createUrl } from "../Utils";
+import { createUrl } from "../../Utils";
 import axios from 'axios';
 
 
@@ -22,7 +22,9 @@ export async function register(firstName, lastName, email, password, mobileNo, d
     try {
         const url = createUrl('users/signup')
         const body = {
-            firstName, lastName, email, password, mobileNo, dateOfBirth, gender, age, addressLine1, addressLine2, city, state, country, pinCode
+            firstName, lastName, email, password, mobileNo, dateOfBirth, gender, age, 
+            'userAddress':
+           { addressLine1, addressLine2, city, state, country, pinCode}
         }
         const response = await axios.post(url,body)
         return response.data;

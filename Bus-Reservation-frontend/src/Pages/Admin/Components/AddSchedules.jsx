@@ -1,43 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Table, FormSelect } from "react-bootstrap";
-import Select from "react-select";
-// import { getRoutes, getBuses } from '../services/apiService'; // Assuming you have this service
+import { getRoutes } from "../../../Services/AdminServices/routeService";
+import { getBuses } from "../../../Services/AdminServices/busService";
+import { addSchedule } from "../../../Services/AdminServices/scheduleService";
 
 const AddSchedule = () => {
   const [arrivalTime, setArrivalTime] = useState("");
   const [departureTime, setDepartureTime] = useState("");
   const [selectedRouteId, setSelectedRouteId] = useState("");
   const [selectedBusId, setSelectedBusId] = useState("");
-  const [routes, setRoutes] = useState([
-    { id: 1, source: "Pune", destination: "Mumbai" },
-    { id: 2, source: "Delhi", destination: "Bangalore" },
-    { id: 3, source: "Kolkata", destination: "Chennai" },
-    // Add more sample route objects as needed
-  ]);
-  const [buses, setBuses] = useState([
-    //static data
-    { id: 1, busNo: "MH 12 AB 3456", capacity: 50 },
-    { id: 2, busNo: "KA 01 HK 7890", capacity: 40 },
-    { id: 3, busNo: "TN 10 DL 5678", capacity: 30 },
-  ]);
-  const [schedules, setSchedules] = useState([
-    {
-      id: 1,
-      arrivalTime: "09:00:00",
-      departureTime: "10:00:00",
-      route: { source: "Pune", destination: "Mumbai" },
-      bus: { busNo: "MH 12 AB 3456" },
-    },
-    {
-      id: 2,
-      arrivalTime: "15:00:00",
-      departureTime: "16:00:00",
-      route: { source: "Delhi", destination: "Bangalore" },
-      bus: { busNo: "KA 01 HK 7890" },
-    },
-    // Add more schedule objects as needed
-  ]);
+  const [routes, setRoutes] = useState([]);
+  const [buses, setBuses] = useState([]);
+  const [schedules, setSchedules] = useState([]);
 
+  //All test data
+  {
+    [
+      { id: 1, source: "Pune", destination: "Mumbai" },
+      { id: 2, source: "Delhi", destination: "Bangalore" },
+      { id: 3, source: "Kolkata", destination: "Chennai" },
+      // Add more sample route objects as needed
+    ],
+      [
+        //static data
+        { id: 1, busNo: "MH 12 AB 3456", capacity: 50 },
+        { id: 2, busNo: "KA 01 HK 7890", capacity: 40 },
+        { id: 3, busNo: "TN 10 DL 5678", capacity: 30 },
+      ],
+      [
+        {
+          id: 1,
+          arrivalTime: "09:00:00",
+          departureTime: "10:00:00",
+          route: { source: "Pune", destination: "Mumbai" },
+          bus: { busNo: "MH 12 AB 3456" },
+        },
+        {
+          id: 2,
+          arrivalTime: "15:00:00",
+          departureTime: "16:00:00",
+          route: { source: "Delhi", destination: "Bangalore" },
+          bus: { busNo: "KA 01 HK 7890" },
+        },
+        // Add more schedule objects as needed
+      ];
+  }
   useEffect(() => {
     const fetchRoutes = async () => {
       try {
@@ -61,24 +68,29 @@ const AddSchedule = () => {
     fetchBuses();
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Prepare the data for the backend (replace with your actual API call later)
+    // Prepare the data for the backend
+
     const newScheduleData = {
       arrivalTime,
       departureTime,
-      route_id: selectedRouteId,
+      route_id: selectedRouteId, //i may get error here
       bus_id: selectedBusId,
     };
+    try {
+      const resposne = await addSchedule(newScheduleData);
+      console.log("Form submitted:", resposne);
 
-    console.log("Form submitted:", newScheduleData);
-
-    // Clear form fields after submission
-    setArrivalTime("");
-    setDepartureTime("");
-    setSelectedRouteId("");
-    setSelectedBusId("");
+      // Clear form fields after submission
+      setArrivalTime("");
+      setDepartureTime("");
+      setSelectedRouteId("");
+      setSelectedBusId("");
+    } catch (error) {
+      console.log("Error occur while scheduling", error);
+    }
   };
 
   return (

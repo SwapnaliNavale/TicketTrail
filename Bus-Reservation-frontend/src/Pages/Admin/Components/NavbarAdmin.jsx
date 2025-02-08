@@ -33,8 +33,8 @@ const NavbarAdmin = () => {
 
           {/* Right-side Auth Links */}
           <Nav className="gap-2">
-            <Button as={Link} to="/login" variant="outline-primary" className="rounded-pill px-3">Login</Button>
-            <Button as={Link} to="/register" variant="outline-success" className="rounded-pill px-3">Signup</Button>
+            {/* <Button as={Link} to="/login" variant="outline-primary" className="rounded-pill px-3">Login</Button> */}
+            {/* <Button as={Link} to="/register" variant="outline-success" className="rounded-pill px-3">Signup</Button> */}
             <Button as={Link} to="/logout" variant="outline-secondary" className="rounded-pill px-3">Logout</Button>
             {/* <Button as={Link} to="/users/notification" variant="outline-warning" className="rounded-pill text-dark px-3">
               <BsChatText size={20} />
