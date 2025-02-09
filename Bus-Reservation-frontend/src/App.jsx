@@ -6,25 +6,37 @@ import Mylogin from "./Pages/Mylogin";
 import Homepage from "./Pages/Homepage";
 import BusListPage from "./Pages/BusListPage";
 import AdminPageWithRouter from "./Pages/Admin/AdminPage";
+
+import SeatBooking from "./Components/SeatBooking";
+// import DemoPayments from "./Components/DemoPayments";
+import { UserProvider } from "./Context/UserContext";
+
 import Offers from "./Components/Offers";
 import AboutUs from "./Components/AboutUs";
 import Services from "./Components/Services";
+import Register from "./Pages/Register";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Homepage />}></Route>
-          {/* <Route path="/admin-home" element={<AdminPage />}></Route> */}
-          <Route path="/admin/*" element={<AdminPageWithRouter />}></Route>
-          <Route path="/login" element={<Mylogin />}></Route>
-          <Route path="/about" element={<AboutUs />}></Route>
-          <Route path="/offers" element={<Offers />}></Route>
-          <Route path="/services" element={<Services />}></Route>
-          <Route path="/bus-list" element={<BusListPage />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <UserProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Homepage />}></Route>
+            <Route path="/admin/*" element={<AdminPageWithRouter />}></Route>
+            <Route path="/login" element={<Mylogin />}></Route>
+            <Route path="/register" element={<Register />}></Route>
+            <Route path="/seat-booking" element={<SeatBooking />}></Route>
+            <Route path="/about" element={<AboutUs />}></Route>
+            <Route path="/offers" element={<Offers />}></Route>
+            <Route path="/services" element={<Services />}></Route>
+            {/* <Route path="/payment" element={<DemoPayments />}></Route> */}
+            {/* check index.html for payments */}
+            <Route path="/bus-list" element={<BusListPage />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </UserProvider>
+
       <ToastContainer />
     </>
   );

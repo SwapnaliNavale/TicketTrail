@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import '../css/Login.css'
+import "../css/Login.css";
 import { jwtDecode } from "jwt-decode";
-
-
+import { login } from "../Services/UserServices/user";
 
 const Mylogin = () => {
   const [email, setEmail] = useState("swapnu@123");
@@ -21,23 +20,26 @@ const Mylogin = () => {
       // API call
       const response = await login(email, password);
       // Check for valid response/successful
-      if (response["status"] === "success") { // Ensure "success" is a string
+      if (response["status"] === "success") {
+        // Ensure "success" is a string
         // Get the token from json.data
         const data = response["data"];
         const token = data["jwt"];
 
         // Store this token in browser's session
-        sessionStorage["token"] = token;
+        // sessionStorage["token"] = token;
+        // sessionStorage["token"] = token;
+        localStorage.setItem("token", token);
         toast.success("Logged in successfully");
 
-         // Decode the token to extract user role
-         const decodedToken = jwtDecode(token);
-         const userRole = decodedToken.role;  // Adjust 'role' to match your backend JWT payload structure
+        // Decode the token to extract user role
+        const decodedToken = jwtDecode(token);
+        const userRole = decodedToken.authorities; // Adjust 'role' to match your backend JWT payload structure
 
         // After successful authentication, dynamically navigate to homepage
-         // Conditional navigation based on role
-        if (userRole === "admin") {
-          navigate("/admin-home");
+        // Conditional navigation based on role
+        if (userRole === "ROLE_ADMIN") {
+          navigate("/admin");
         } else {
           navigate("/");
         }
@@ -47,9 +49,8 @@ const Mylogin = () => {
     }
   };
 
-
   return (
-    <div className="login-background login-form"> 
+    <div className="login-background login-form">
       <div className="container d-flex justify-content-center align-items-center min-vh-100 .">
         <div className="row w-100">
           <div className="col-12 col-md-6 col-lg-4 mx-auto">

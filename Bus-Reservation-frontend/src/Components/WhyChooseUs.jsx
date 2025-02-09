@@ -29,20 +29,20 @@ const WhyChooseUs = () => {
       title: '24/7 Support',
       description: 'Get assistance anytime, anywhere with our dedicated support team.',
     },
-    {
-      image: Image5,
-      title: 'Secure Payments',
-      description: 'Make secure online payments with our trusted payment gateways.',
-    },
+    // {
+    //   image: Image5,
+    //   title: 'Secure Payments',
+    //   description: 'Make secure online payments with our trusted payment gateways.',
+    // },
   ];
 
   return (
-    <section className="py-5 bg-light">
+    <section className="why-choose-us-section"> 
       <div className="container">
-        <h2 className="text-center mb-4">Why Choose Us?</h2>
-        <div className="d-flex justify-content-center">
+        <h2 className="why-choose-us-title">Why Choose Us?</h2>
+        <div className="why-choose-us-cards">
           {features.map((feature, index) => (
-            <Card key={index} style={{ width: '18rem', marginRight: '10px' }}> 
+            <Card key={index} className="why-choose-us-card">
               <Card.Img variant="top" src={feature.image} />
               <Card.Body>
                 <Card.Title>{feature.title}</Card.Title>
@@ -57,3 +57,4 @@ const WhyChooseUs = () => {
 };
 
 export default WhyChooseUs;
+

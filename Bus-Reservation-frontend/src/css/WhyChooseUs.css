@@ -1,47 +1,32 @@
-.active {
-    opacity: 1; /* Make the active image fully visible */
-  }
-  
-  .active:not(:first-child) {
-    animation: slideIn 0.5s ease-in-out forwards;
-  }
-  
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
 
-  .active {
-    opacity: 1;
-  }
-  
-  .active:not(:first-child) {
-    animation: slideIn 0.5s ease-in-out forwards;
-  }
-  
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
 
-  .carousel-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth; 
-  }
 
-  .carousel-control {
-    background-color: #007bff; 
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 50%;
+ /* WhyChooseUs.css */
+.why-choose-us-section {
+  padding: 50px 0; 
+}
+
+.why-choose-us-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.why-choose-us-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.why-choose-us-card {
+  width: 250px; 
+  margin: 20px; 
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .why-choose-us-card {
+    width: 100%; 
   }
+}
