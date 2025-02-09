@@ -31,16 +31,12 @@ public class SecurityConfiguration {
 			//2. configure URL based access
 	        .authorizeHttpRequests
 	        (request -> 
-	        request.requestMatchers("/products/view",
-	        		"/users/signup","/users/signin",
-					"/v*/api-doc*/**","/swagger-ui/**").permitAll() 
+	        request.requestMatchers("/users/signup", "/users/signin").permitAll() 
 	        //required explicitly for JS clients (eg React app - to permit pre flight requests)
 	        .requestMatchers(HttpMethod.OPTIONS).permitAll()
 	        	
-	       .requestMatchers("/products/purchase/**")
-	       .hasRole("CUSTOMER")
-	       .requestMatchers("/products/add","/products/delete")
-	       .hasRole("ADMIN")        		
+	       .requestMatchers("/routes/**","/schedules/**")
+	       .hasAuthority("ADMIN")        		
 	        .anyRequest().authenticated())  
 	  //      .httpBasic(Customizer.withDefaults()) - replacing it by custom JWT filter
 	        .sessionManagement(session 
