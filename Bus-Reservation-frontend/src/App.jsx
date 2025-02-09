@@ -14,6 +14,7 @@ import { UserProvider } from "./Context/UserContext";
 import Offers from "./Components/Offers";
 import AboutUs from "./Components/AboutUs";
 import Services from "./Components/Services";
+import Register from "./Pages/Register";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<Homepage />}></Route>
             <Route path="/admin/*" element={<AdminPageWithRouter />}></Route>
             <Route path="/login" element={<Mylogin />}></Route>
+            <Route path="/register" element={<Register />}></Route>
             <Route path="/seat-booking" element={<SeatBooking />}></Route>
             <Route path="/about" element={<AboutUs />}></Route>
             <Route path="/offers" element={<Offers />}></Route>
