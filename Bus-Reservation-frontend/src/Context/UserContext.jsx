@@ -1,25 +1,44 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export const UserContext = createContext();
+const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  // cosnt [totalFair, setTotalfair] = useState(0);
 
-  const login = (userData) => {
-    // Store user data (e.g., in local storage or using a secure mechanism)
-    setUser(userData); 
-    localStorage.setItem('user', JSON.stringify(userData)); 
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem('token');
+  //   console.log("storedUser: "+ storedUser); //if null
+  //   // change getItem to token
+    
+  //   if (storedUser) {
+  //     setUser(JSON.parse(storedUser));
+  //   }
+  // }, []);
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token'); 
+    if (storedToken) {
+      setUser({ token: storedToken }); 
+    }
+  }, []);
+
+  const updateUser = (newUser) => {
+    setUser(newUser);
+    localStorage.setItem('user', JSON.stringify(newUser)); 
   };
 
   const logout = () => {
-    // Clear user data from state and local storage
-    setUser(null); 
-    localStorage.removeItem('user');
+    setUser(null);
+    localStorage.removeItem('user'); 
   };
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ user, updateUser, logout }}>
       {children}
     </UserContext.Provider>
   );
+};
+
+export const useUser = () => {
+  return useContext(UserContext);
 };

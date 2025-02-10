@@ -173,7 +173,7 @@ import axios from "axios";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { FaBusAlt, FaChair } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/SeatBooking.css"; // Custom CSS for styling
+import "../css/SeatBooking.css"; 
 
 const SeatBooking = () => {
   const [seats, setSeats] = useState([]);
@@ -208,17 +208,17 @@ const SeatBooking = () => {
     calculateTotalFare(updatedSelectedSeats);
   };
 
-  const canSelectBeside = (seatId) => {
-    const seatIndex = seats.findIndex(seat => seat.id === seatId);
-    const adjacentSeats = [seats[seatIndex - 1], seats[seatIndex + 1]];
-    return adjacentSeats.every(adjSeat => {
-      if (adjSeat && adjSeat.gender && adjSeat.gender !== userGender) {
-        alert("Cannot select beside a seat of different gender.");
-        return false;
-      }
-      return true;
-    });
-  };
+  // const canSelectBeside = (seatId) => {
+  //   const seatIndex = seats.findIndex(seat => seat.id === seatId);
+  //   const adjacentSeats = [seats[seatIndex - 1], seats[seatIndex + 1]];
+  //   return adjacentSeats.every(adjSeat => {
+  //     if (adjSeat && adjSeat.gender && adjSeat.gender !== userGender) {
+  //       alert("Cannot select beside a seat of different gender.");
+  //       return false;
+  //     }
+  //     return true;
+  //   });
+  // };
 
   const calculateTotalFare = (selectedSeats) => {
     let fare = selectedSeats.reduce((acc, seatId) => {

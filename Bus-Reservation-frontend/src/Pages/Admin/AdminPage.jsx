@@ -104,7 +104,7 @@ const AdminPageWithRouter = () => (
       <Route index element={<Dashboard/>}/>
       <Route path="add-bus" element={<AddBus />} />
       <Route path="add-route" element={<AddRoute />} />
-      <Route path="tickets" element={<ManageTickets />} />
+      {/* <Route path="tickets" element={<ManageTicket/>} /> */}
       <Route path="users" element={<ManageUserDetails/>}/>
       <Route path="add-schedule" element={<AddSchedule />} />
       <Route path="edit-user/:userId" element={<EditUserDetails />} />

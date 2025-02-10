@@ -9,10 +9,10 @@ function TicketData(){
     const[email, setEmail] = useState('')
     const[mobileNo, setMobileNo] = useState('')
 
-    const paymentDeatils = {
-        totalamount : "$500",
-    };
-     const{totalamount} = paymentDeatils;
+    // const paymentDeatils = {
+    //     totalamount : "$500",
+    // };
+    //  const{totalamount} = paymentDeatils;
     
     
 
