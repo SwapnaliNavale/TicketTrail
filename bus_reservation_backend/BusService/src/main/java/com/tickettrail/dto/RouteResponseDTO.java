@@ -1,8 +1,15 @@
 package com.tickettrail.dto;
 
-import lombok.Getter;
+import com.tickettrail.entities.Schedule;
 
-@Getter
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RouteResponseDTO {
 
     private Long id;
@@ -10,15 +17,6 @@ public class RouteResponseDTO {
     private String destination;
     private Long distance;
     private String duration;
-
-    public RouteResponseDTO(Long id, String source, String destination, Long distance, String duration) {
-        this.id = id;
-        this.source = source;
-        this.destination = destination;
-        this.distance = distance;
-        this.duration = duration;
-    }
-
     
 }
 
