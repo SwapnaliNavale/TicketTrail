@@ -3,6 +3,7 @@ package com.tickettrail.entities;
 import java.time.LocalTime;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
@@ -21,9 +22,9 @@ import lombok.ToString;
 @Setter
 @ToString(callSuper = true, exclude = {"route"})
 public class Schedule extends BaseEntity {
-
+	@Column (name="departure_time")
 	private LocalTime departureTime;
-	
+	@Column (name = "arrival_time")
 	private LocalTime arrivalTime;
 	
 	

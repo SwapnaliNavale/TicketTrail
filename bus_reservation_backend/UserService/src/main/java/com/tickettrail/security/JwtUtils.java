@@ -44,27 +44,40 @@ public class JwtUtils {
 
 	// will be invoked by Authentication controller , upon successful
 	// authentication
+//	public String generateJwtToken(Authentication authentication) {
+//		log.info("generate jwt token " + authentication);//contains verified user details
+//		CustomUserDetailsImpl userPrincipal = (CustomUserDetailsImpl) authentication.getPrincipal();
+////JWT : userName,issued at ,exp date,digital signature(does not typically contain password , can contain authorities
+//		return Jwts.builder() // JWTs : a Factory class , used to create JWT tokens
+//				.setSubject((userPrincipal.getUsername())) // setting subject part of the token(typically user
+//															// name/email)
+//				.setIssuedAt(new Date())// Sets the JWT Claims iat (issued at) value of current date
+//				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))// Sets the JWT Claims exp
+//																					// (expiration) value.
+//				// setting a custom claim , to add granted authorities
+//				.claim("authorities", getAuthoritiesInString(userPrincipal.getAuthorities()))
+//				// setting a custom claim , to add user id (remove it if not required in the project)
+////				.claim("user_id",userPrincipal.getUserEntity().getId())
+//		
+//				.signWith(key, SignatureAlgorithm.HS512) // Signs the constructed JWT using the specified
+//															// algorithm with the specified key, producing a
+//															// JWS(Json web signature=signed JWT)
+//
+//				// Using token signing algo : HMAC using SHA-512
+//				.compact();// Actually builds the JWT and serializes it to a compact, URL-safe string
+//	}
+	// Method to generate JWT token
 	public String generateJwtToken(Authentication authentication) {
-		log.info("generate jwt token " + authentication);//contains verified user details
-		CustomUserDetailsImpl userPrincipal = (CustomUserDetailsImpl) authentication.getPrincipal();
-//JWT : userName,issued at ,exp date,digital signature(does not typically contain password , can contain authorities
-		return Jwts.builder() // JWTs : a Factory class , used to create JWT tokens
-				.setSubject((userPrincipal.getUsername())) // setting subject part of the token(typically user
-															// name/email)
-				.setIssuedAt(new Date())// Sets the JWT Claims iat (issued at) value of current date
-				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))// Sets the JWT Claims exp
-																					// (expiration) value.
-				// setting a custom claim , to add granted authorities
-				.claim("authorities", getAuthoritiesInString(userPrincipal.getAuthorities()))
-				// setting a custom claim , to add user id (remove it if not required in the project)
-				.claim("user_id",userPrincipal.getUserEntity().getId())
-		
-				.signWith(key, SignatureAlgorithm.HS512) // Signs the constructed JWT using the specified
-															// algorithm with the specified key, producing a
-															// JWS(Json web signature=signed JWT)
+	    log.info("Generating JWT token for: " + authentication);
+	    String authorities = getAuthoritiesInString(authentication.getAuthorities());
 
-				// Using token signing algo : HMAC using SHA-512
-				.compact();// Actually builds the JWT and serializes it to a compact, URL-safe string
+	    return Jwts.builder()
+	            .setSubject(authentication.getName())
+	            .setIssuedAt(new Date())
+	            .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+	            .claim("authorities", authorities) // Store authorities as a String
+	            .signWith(key, SignatureAlgorithm.HS512)
+	            .compact();
 	}
 
 	// this method will be invoked by our custom JWT filter
@@ -101,11 +114,18 @@ public class JwtUtils {
 		return authorityString;
 	}
 	// this method will be invoked by our custom JWT filter to get list of granted authorities n store it in auth token
-		public List<GrantedAuthority> getAuthoritiesFromClaims(Claims claims) {
-		String authString = (String) claims.get("authorities");
-		List<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(authString);
-		authorities.forEach(System.out::println);
-		return authorities;
+	public List<GrantedAuthority> getAuthoritiesFromClaims(Claims claims) {
+	    // Retrieve the authorities claim as a String
+	    String authString = claims.get("authorities", String.class);
+	    log.info("Extracted Authorities from JWT: " + authString); // Debugging line
+
+	    if (authString == null || authString.isEmpty()) {
+	        log.error("No authorities found in JWT!");
+	        return List.of(); // Return empty list if authorities are missing
+	    }
+
+	    // Convert comma-separated string to List<GrantedAuthority>
+	    return AuthorityUtils.commaSeparatedStringToAuthorityList(authString);
 	}
 	// this method will be invoked by our custom JWT filter to get user id n store it in auth token
 			public Long getUserIdFromJwtToken(Claims claims) {

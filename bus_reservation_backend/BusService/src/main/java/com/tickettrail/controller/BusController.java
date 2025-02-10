@@ -30,7 +30,7 @@ public class BusController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<String>> addBus(@RequestBody BusRequestDTO requestDTO) {
         busService.addBus(requestDTO);
-        return ResponseEntity.ok(new ApiResponse<>("Bus added successfully", "SUCCESS"));
+        return ResponseEntity.ok(new ApiResponse<>("success", "Bus added successfully"));
     }
 
     @GetMapping("/{id}")
@@ -43,14 +43,14 @@ public class BusController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<String>> updateBus(@PathVariable Long id, @RequestBody BusRequestDTO requestDTO) {
         busService.updateBus(id, requestDTO);
-        return ResponseEntity.ok(new ApiResponse<>("Bus updated successfully", "SUCCESS"));
+        return ResponseEntity.ok(new ApiResponse<>("success", "Bus updated successfully"));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<String>> deleteBus(@PathVariable Long id) {
         busService.deleteBus(id);
-        return ResponseEntity.ok(new ApiResponse<>("Bus deleted successfully", "SUCCESS"));
+        return ResponseEntity.ok(new ApiResponse<>("success", "Bus deleted successfully"));
     }
 }
 
