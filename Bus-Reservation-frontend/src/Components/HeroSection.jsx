@@ -26,7 +26,7 @@ const HeroSection = () => {
     // console.log("To:", to);
     // console.log("Date:", date);
     try {
-      const response = await axios.get('http://localhost:8080/buses', { 
+      const response = await axios.get('http://localhost:8080/schedules', { 
         params: { 
           from: from, 
           to: to, 

@@ -162,7 +162,7 @@ const BusSeatBooking = () => {
   useEffect(() => {
     const fetchBusDetails = async () => {
       try {
-        const response = await axios.get(`/buses/${busId}`);
+        const response = await axios.get(`http://localhost:8080/buses/${busId}`);
         if (response.status === 200) {
           setBusData(response.data);
         } else {

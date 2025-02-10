@@ -16,7 +16,7 @@ import AboutUs from "./Components/AboutUs";
 import Services from "./Components/Services";
 import Register from "./Pages/Register";
 import BusSeatBooking from "./layouts/BusSeatBooking";
-import BusBooking from "./layouts/BusList";
+// import BusBooking from "./layouts/BusList";
 import { BusProvider } from "./Context/BusContext";
 import BusList from "./layouts/BusList";
 import UserProfile from "./Components/UserProfile";

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Button,FormSelect } from "react-bootstrap";
 import { getBuses, addBus } from "../../../Services/AdminServices/busService";
 import { getRoutes } from "../../../Services/AdminServices/routeService";
-
+import { Table } from "react-bootstrap";
 
 const AddBus = () => {
   const [busNo, setBusNo] = useState("");
