@@ -1,12 +1,15 @@
 package com.tickettrail.dto;
+import java.time.LocalTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-
-import java.time.LocalTime;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class RouteRequestDTO {
 
     @NotBlank(message = "Source is required")
@@ -19,14 +22,14 @@ public class RouteRequestDTO {
     private Long distance;
 
     @NotNull(message = "Duration is required")
+    @JsonFormat(pattern = "HH:mm:ss")  // Ensures JSON output is in correct format
     private LocalTime duration;
 
-    public RouteRequestDTO(String source, String destination, Long distance, LocalTime duration) {
+    // Constructor that converts numeric duration into LocalTime
+    public RouteRequestDTO(String source, String destination, Long distance, int durationHours) {
         this.source = source;
         this.destination = destination;
         this.distance = distance;
-        this.duration = duration;
+        this.duration = LocalTime.of(durationHours, 0); // Converts "2" → "02:00:00"
     }
-
-   
 }
