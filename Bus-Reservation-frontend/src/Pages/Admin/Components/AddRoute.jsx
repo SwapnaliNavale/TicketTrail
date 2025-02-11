@@ -13,6 +13,8 @@ const AddRoute = () => {
   const [source, setSource] = useState("");
   const [routes, setRoutes] = useState([]);
 
+  // Ensure duration is always in "HH:mm:ss" format
+  const formattedDuration = duration.length === 5 ? `${duration}:00` : duration;
   // const routes = [
   //   { id: 1, source: 'Pune', destination: 'Mumbai' },
   //   { id: 2, source: 'Delhi', destination: 'Bangalore' },
@@ -21,16 +23,28 @@ const AddRoute = () => {
   // ];
 
   // Fetch routes on component mount
+  // useEffect(() => {
+  //   const fetchRoutes = async () => {
+  //     try {
+  //       const fetchedRoutes = await getRoutes();
+  //       setRoutes(fetchedRoutes);
+  //     } catch (error) {
+  //       console.error("Error fetching routes:", error);
+  //     }
+  //   };
+
+  //   fetchRoutes();
+  // }, []);
   useEffect(() => {
     const fetchRoutes = async () => {
       try {
-        const fetchedRoutes = await getRoutes();
-        setRoutes(fetchedRoutes);
+        const response = await getRoutes();
+        setRoutes(response.data); // Extract 'data' array
       } catch (error) {
         console.error("Error fetching routes:", error);
       }
     };
-
+  
     fetchRoutes();
   }, []);
 
@@ -41,7 +55,8 @@ const AddRoute = () => {
       source,
       destination,
       distance: parseFloat(distance),
-      duration: parseFloat(duration),
+      // duration: parseFloat(duration),
+      duration: formattedDuration,  // Ensures proper format
     };
     console.log("Form submitted:", { newRouteData });
 
@@ -56,8 +71,7 @@ const AddRoute = () => {
       setDistance("");
       setDuration("");
     } catch (error) {
-        console.log("Error while adding route",error);
-        
+      console.log("Error while adding route", error);
     }
   };
 
@@ -98,11 +112,32 @@ const AddRoute = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        {/* <Form.Group className="mb-3">
           <Form.Label>Duration (in hours)</Form.Label>
           <Form.Control
-            type="number"
+            type="time"
             placeholder="Enter Duration"
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+            required
+          />
+        </Form.Group> */}
+        {/* <Form.Group className="mb-3">
+          <Form.Label>Duration (HH:mm:ss)</Form.Label>
+          <Form.Control
+            type="time"
+            step="1" // Enables seconds (HH:mm:ss format)
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+            required
+          />
+        </Form.Group> */}
+
+        <Form.Group className="mb-3">
+          <Form.Label>Duration (HH:mm:ss)</Form.Label>
+          <Form.Control
+            type="time"
+            step="1" // Enables seconds (HH:mm:ss)
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
             required

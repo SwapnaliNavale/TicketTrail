@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Table, FormSelect } from "react-bootstrap";
 import { getRoutes } from "../../../Services/AdminServices/routeService";
 import { getBuses } from "../../../Services/AdminServices/busService";
-import { addSchedule } from "../../../Services/AdminServices/scheduleService";
+import { addSchedule, getSchedules } from "../../../Services/AdminServices/scheduleService";
 
 const AddSchedule = () => {
   const [arrivalTime, setArrivalTime] = useState("");
@@ -14,42 +14,42 @@ const AddSchedule = () => {
   const [schedules, setSchedules] = useState([]);
 
   //All test data
-  {
-    [
-      { id: 1, source: "Pune", destination: "Mumbai" },
-      { id: 2, source: "Delhi", destination: "Bangalore" },
-      { id: 3, source: "Kolkata", destination: "Chennai" },
-      // Add more sample route objects as needed
-    ],
-      [
-        //static data
-        { id: 1, busNo: "MH 12 AB 3456", capacity: 50 },
-        { id: 2, busNo: "KA 01 HK 7890", capacity: 40 },
-        { id: 3, busNo: "TN 10 DL 5678", capacity: 30 },
-      ],
-      [
-        {
-          id: 1,
-          arrivalTime: "09:00:00",
-          departureTime: "10:00:00",
-          route: { source: "Pune", destination: "Mumbai" },
-          bus: { busNo: "MH 12 AB 3456" },
-        },
-        {
-          id: 2,
-          arrivalTime: "15:00:00",
-          departureTime: "16:00:00",
-          route: { source: "Delhi", destination: "Bangalore" },
-          bus: { busNo: "KA 01 HK 7890" },
-        },
-        // Add more schedule objects as needed
-      ];
-  }
+  // {
+  //   [
+  //     { id: 1, source: "Pune", destination: "Mumbai" },
+  //     { id: 2, source: "Delhi", destination: "Bangalore" },
+  //     { id: 3, source: "Kolkata", destination: "Chennai" },
+  //     // Add more sample route objects as needed
+  //   ],
+  //     [
+  //       //static data
+  //       { id: 1, busNo: "MH 12 AB 3456", capacity: 50 },
+  //       { id: 2, busNo: "KA 01 HK 7890", capacity: 40 },
+  //       { id: 3, busNo: "TN 10 DL 5678", capacity: 30 },
+  //     ],
+  //     [
+  //       {
+  //         id: 1,
+  //         arrivalTime: "09:00:00",
+  //         departureTime: "10:00:00",
+  //         route: { source: "Pune", destination: "Mumbai" },
+  //         bus: { busNo: "MH 12 AB 3456" },
+  //       },
+  //       {
+  //         id: 2,
+  //         arrivalTime: "15:00:00",
+  //         departureTime: "16:00:00",
+  //         route: { source: "Delhi", destination: "Bangalore" },
+  //         bus: { busNo: "KA 01 HK 7890" },
+  //       },
+  //       // Add more schedule objects as needed
+  //     ];
+  // }
   useEffect(() => {
     const fetchRoutes = async () => {
       try {
         const fetchedRoutes = await getRoutes();
-        setRoutes(fetchedRoutes);
+        setRoutes(fetchedRoutes.data);
       } catch (error) {
         console.error("Error fetching routes:", error);
       }
@@ -58,15 +58,26 @@ const AddSchedule = () => {
     const fetchBuses = async () => {
       try {
         const fetchedBuses = await getBuses();
-        setBuses(fetchedBuses);
+        setBuses(fetchedBuses.data);
       } catch (error) {
         console.error("Error fetching buses:", error);
       }
     };
 
+    const fetchSchedules = async () => {
+      try{
+        const fetchSchedules= await getSchedules();
+        setSchedules(fetchSchedules.data)
+      } catch (error){
+        console.error("Error fetching schedules:", error)
+      }
+    }
     fetchRoutes();
     fetchBuses();
+    fetchSchedules();
   }, []);
+
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -76,8 +87,8 @@ const AddSchedule = () => {
     const newScheduleData = {
       arrivalTime,
       departureTime,
-      route_id: selectedRouteId, //i may get error here
-      bus_id: selectedBusId,
+      routeId: selectedRouteId, //i may get error here
+      busId: selectedBusId,
     };
     try {
       const resposne = await addSchedule(newScheduleData);

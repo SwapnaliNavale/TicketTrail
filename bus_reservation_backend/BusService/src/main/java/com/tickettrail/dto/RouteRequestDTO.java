@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Getter
 @NoArgsConstructor
 public class RouteRequestDTO {
@@ -22,7 +24,9 @@ public class RouteRequestDTO {
     private Long distance;
 
     @NotNull(message = "Duration is required")
+    
     @JsonFormat(pattern = "HH:mm:ss")  // Ensures JSON output is in correct format
+
     private LocalTime duration;
 
     // Constructor that converts numeric duration into LocalTime
