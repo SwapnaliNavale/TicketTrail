@@ -20,6 +20,8 @@ import BusSeatBooking from "./layouts/BusSeatBooking";
 import { BusProvider } from "./Context/BusContext";
 import BusList from "./layouts/BusList";
 import UserProfile from "./Components/UserProfile";
+import Ticket from "./layouts/Ticket";
+import TicketData from "./layouts/TicketData";
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
               {/* check index.html for payments */}
               <Route path="/BusSeatSelection/:busId" element={<BusSeatBooking />}></Route>
               <Route path="/bus-list" element={<BusList />}></Route>
+              <Route path="/ticket" element={<Ticket />}></Route>
+              <Route path="/ticket-data" element={<TicketData />}></Route>
             </Routes>
           </BrowserRouter>
         </BusProvider>

@@ -20,11 +20,12 @@ const HeroSection = () => {
   };
 
   // Handle search button click
-  const handleSearch = async() => {
+  const handleSearch = async(e) => {
     // console.log("Searching for buses...");
     // console.log("From:", from);
     // console.log("To:", to);
     // console.log("Date:", date);
+    e.preventDefault();
     try {
       const response = await axios.get('http://localhost:8080/schedules', { 
         params: { 
