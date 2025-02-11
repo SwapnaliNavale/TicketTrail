@@ -6,6 +6,8 @@ import lombok.Getter;
 
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Getter
 public class RouteRequestDTO {
 
@@ -19,6 +21,9 @@ public class RouteRequestDTO {
     private Long distance;
 
     @NotNull(message = "Duration is required")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss") // Ensures correct JSON format
+//    private LocalTime duration;
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime duration;
 
     public RouteRequestDTO(String source, String destination, Long distance, LocalTime duration) {

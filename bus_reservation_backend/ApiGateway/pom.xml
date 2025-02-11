@@ -8,11 +8,11 @@
 		<version>3.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.cdac</groupId>
+	<groupId>com.tickettrail</groupId>
 	<artifactId>ApiGateway</artifactId>
 	<version>0.0.1</version>
 	<name>ApiGateway</name>
-	<description>Demo project for Spring Cloud API Gateway</description>
+	<description>API For TicketTrail : Online Bus Booking System Using Spring-boot</description>
 	<url/>
 	<licenses>
 		<license/>

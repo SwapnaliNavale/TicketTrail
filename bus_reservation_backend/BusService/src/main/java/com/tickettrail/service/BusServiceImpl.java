@@ -1,5 +1,8 @@
 package com.tickettrail.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +49,13 @@ public class BusServiceImpl implements BusService {
     @Override
     public void deleteBus(Long id) {
         busRepository.deleteById(id);
+    }
+
+    @Override
+    public List<BusResponseDTO> getALLBuses() {
+        List<Bus> buses = busRepository.findAll();
+        return buses.stream()
+                    .map(bus -> modelMapper.map(bus, BusResponseDTO.class))
+                    .collect(Collectors.toList());
     }
 }

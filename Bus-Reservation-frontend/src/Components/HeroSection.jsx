@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import "../css/HeroSection.css";
 import { useBus } from "../Context/BusContext.jsx";
-import {axios} from 'axios';
+import axios from 'axios';
 
 const HeroSection = () => {
   const [from, setFrom] = useState("");
@@ -20,33 +20,68 @@ const HeroSection = () => {
   };
 
   // Handle search button click
-  const handleSearch = async() => {
-    // console.log("Searching for buses...");
-    // console.log("From:", from);
-    // console.log("To:", to);
-    // console.log("Date:", date);
-    try {
-      const response = await axios.get('http://localhost:8080/schedules', { 
-        params: { 
-          from: from, 
-          to: to, 
-          date: date 
-        } 
-      });
+  // const handleSearch = async() => {
+  //   // console.log("Searching for buses...");
+  //   // console.log("From:", from);
+  //   // console.log("To:", to);
+  //   // console.log("Date:", date);
+  //   try {
+  //     const response = await axios.get('http://localhost:8080/schedules',{
+  //     headers: {
+  //       Authorization: localStorage.getItem('token')
+  //     }}
+      
+  //     // , 
+  //     // { 
+  //     //   params: { 
+  //     //     from: from, 
+  //     //     to: to, 
+  //     //     date: date 
+  //     //   } 
+  //     // }
+  //     ).then((data)=> {
+  //       debugger
+  //       console.log("debugger");
+  //     })
+     
 
+    
+  //     if (response.status === 200) {
+  //       navigate('/bus-list', { state: { buses: response.data } }); 
+  //     } else {
+  //       console.error('Error fetching bus data:', response.status);
+  //       // Handle error (e.g., display an error message to the user)
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching bus data:', error);
+  //     // Handle error (e.g., display an error message to the user)
+  //   }
+
+
+  // };
+
+  const handleSearch = async () => {
+    const token = `Bearer ` + 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzd2FwbmFsaUAxMjMiLCJpYXQiOjE3MzkxOTEyMTAsImV4cCI6MTczOTI3NzYxMCwiYXV0aG9yaXRpZXMiOiJST0xFX0FETUlOIn0.WudrLznYoY7YP3r3Dh5F4mj4u-Tj-8dTdm66nfEYHmFtEHdI04-VNUthLv2ozjBFPf6mkNhZz7obs6cnvz_t4A'//localStorage.getItem('token')
+    try {
+      const response = await axios.get('http://localhost:8080/schedules', {
+        headers: {
+          Authorization: token
+        }
+      });
+  
+      debugger; // This will allow you to inspect the response before navigation
+      console.log("Response:", response);
+  
       if (response.status === 200) {
         navigate('/bus-list', { state: { buses: response.data } }); 
       } else {
         console.error('Error fetching bus data:', response.status);
-        // Handle error (e.g., display an error message to the user)
       }
     } catch (error) {
       console.error('Error fetching bus data:', error);
-      // Handle error (e.g., display an error message to the user)
     }
-
-
   };
+  
 
   return (
     <>

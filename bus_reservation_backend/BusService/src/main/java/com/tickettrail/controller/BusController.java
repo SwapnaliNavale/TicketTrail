@@ -1,5 +1,7 @@
 package com.tickettrail.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -51,6 +53,11 @@ public class BusController {
     public ResponseEntity<ApiResponse<String>> deleteBus(@PathVariable Long id) {
         busService.deleteBus(id);
         return ResponseEntity.ok(new ApiResponse<>("success", "Bus deleted successfully"));
+    }
+    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<List<BusResponseDTO>>> getAllBuses() {
+        return ResponseEntity.ok(ApiResponse.success(busService.getALLBuses()));
     }
 }
 
