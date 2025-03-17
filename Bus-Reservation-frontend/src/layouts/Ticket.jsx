@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-function TicketBooking() {
+function Ticket() {
   const ticketDetails = {
     passengerName: "Sanket",
     bookDate: "2025-02-12",
@@ -81,4 +81,4 @@ function TicketBooking() {
     </div>
   );
 }
-export default TicketBooking;
+export default Ticket;

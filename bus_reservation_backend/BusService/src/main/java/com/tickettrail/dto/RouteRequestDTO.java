@@ -1,63 +1,41 @@
-package com.tickettrail.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+package com.tickettrail.dto;
 
 import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-//@Getter
-//public class RouteRequestDTO {
-//
-//    @NotBlank(message = "Source is required")
-//    private String source;
-//
-//    @NotBlank(message = "Destination is required")
-//    private String destination;
-//
-//    @NotNull(message = "Distance is required")
-//    private Long distance;
-//
-//    @NotNull(message = "Duration is required")
-////    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss") // Ensures correct JSON format
-////    private LocalTime duration;
-//    @JsonFormat(pattern = "HH:mm:ss")
-//    private LocalTime duration;
-//
-//    public RouteRequestDTO(String source, String destination, Long distance, LocalTime duration) {
-//        this.source = source;
-//        this.destination = destination;
-//        this.distance = distance;
-//        this.duration = duration;
-//    }
-//
-//   
-//}
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@Setter
+@NoArgsConstructor
 public class RouteRequestDTO {
 
-    @NotNull(message = "Start location ID is required")
-    private Long startLocationId;
+    @NotBlank(message = "Source is required")
+    private String source;
 
-    @NotNull(message = "End location ID is required")
-    private Long endLocationId;
+    @NotBlank(message = "Destination is required")
+    private String destination;
 
     @NotNull(message = "Distance is required")
     private Long distance;
 
     @NotNull(message = "Duration is required")
-    @JsonFormat(pattern = "HH:mm:ss")
+    
+    @JsonFormat(pattern = "HH:mm:ss")  // Ensures JSON output is in correct format
+
     private LocalTime duration;
 
-    public RouteRequestDTO(Long startLocationId, Long endLocationId, Long distance, LocalTime duration) {
-        this.startLocationId = startLocationId;
-        this.endLocationId = endLocationId;
+    // Constructor that converts numeric duration into LocalTime
+    public RouteRequestDTO(String source, String destination, Long distance, int durationHours) {
+        this.source = source;
+        this.destination = destination;
         this.distance = distance;
-        this.duration = duration;
+        this.duration = LocalTime.of(durationHours, 0); // Converts "2" → "02:00:00"
     }
 }
+

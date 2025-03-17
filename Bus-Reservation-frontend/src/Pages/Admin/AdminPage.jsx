@@ -24,13 +24,7 @@ const AdminLayout = () => {
       <NavbarAdmin />
 
       <div style={{ marginTop: "100px" }} className="d-flex">
-        <div
-          className={`bg-light border-right z-3 ${
-            isSidebarOpen ? "d-block" : "d-none"
-          }`}
-          style={{ width: "180px" }}
-        >
-          <button
+      <button
             className={`btn btn-sm m-3 ${
               isSidebarOpen ? "btn-danger" : "btn-success"
             }`}
@@ -39,6 +33,13 @@ const AdminLayout = () => {
           >
             {isSidebarOpen ? "Close" : "Open"}
           </button>
+        <div
+          className={`bg-light border-right z-3 ${
+            isSidebarOpen ? "d-block" : "d-none"
+          }`}
+          style={{ width: "180px" }}
+        >
+          
 
           <nav className="nav flex-column bg-transparent">
             <h5 className="text-xl font-bold mb-2 p-2 bg-secondary">

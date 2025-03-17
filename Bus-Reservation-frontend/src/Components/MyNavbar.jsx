@@ -1,17 +1,30 @@
-
-
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Navbar, Nav, Container, Button, Dropdown } from "react-bootstrap";
-import {  useUser } from "../Context/UserContext.jsx";
+import { useUser } from "../Context/UserContext.jsx";
+import { logout } from "../Services/UserServices/user.js";
 
 import logo from "../assets/logo.png";
 import { BsChatText, BsPersonCircle } from "react-icons/bs";
 
 const MyNavbar = () => {
-  const { user, logout } = useUser();
+  const { user, updateUser } = useUser();
   console.log("user: ", user); // check this if it is null or not
-  
+  const navigate = useNavigate();
+
+   // Load authentication state from localStorage on mount
+   useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setAuth({ token: storedToken }); // Only set auth state
+    }
+  }, [setAuth]);
+  const handlelogout = async () => {
+    const response = await logout();
+    if (response?.status === "success") {
+      navigate("/login");
+    }
+  };
 
   return (
     <Navbar
@@ -53,7 +66,7 @@ const MyNavbar = () => {
 
           {/* Right-side Auth Links */}
           <Nav className="gap-2">
-            {user ? (
+            {user?.token ? (   //i need to check here for error
               <>
                 <Dropdown>
                   <Dropdown.Toggle
@@ -64,10 +77,14 @@ const MyNavbar = () => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to="/user/profile">
+                    <Dropdown.Item
+                      onClick={updateUser}
+                      as={Link}
+                      to="/user/profile"
+                    >
                       Profile
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+                    <Dropdown.Item onClick={handlelogout}>Logout</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </>
@@ -109,14 +126,13 @@ const MyNavbar = () => {
 
 export default MyNavbar;
 
-
 // import React, { useContext } from 'react';
 // import { Link } from 'react-router-dom';
 // import { Navbar, Nav, Container, Button, Dropdown } from 'react-bootstrap';
-// // import { UserContext } from '../context/UserContext'; 
+// // import { UserContext } from '../context/UserContext';
 
 // const MyNavbar = () => {
-//   const { user, logout } = useContext(UserContext); 
+//   const { user, logout } = useContext(UserContext);
 
 //   return (
 //     <Navbar bg="light" expand="lg">
@@ -128,7 +144,7 @@ export default MyNavbar;
 //             <>
 //               <Dropdown>
 //                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-//                   {user.username || 'Profile'} 
+//                   {user.username || 'Profile'}
 //                 </Dropdown.Toggle>
 
 //                 <Dropdown.Menu>

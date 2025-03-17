@@ -1,12 +1,11 @@
 // routeService.js
 
-// import { createUrl } from "../Utils";
+import api, { config } from '../../config';
 
 // baseUrl
-import api, { config } from "../../config";
+
 import axios from 'axios';
 
-// const API_BASE_URL = 'http://localhost:8080'; // Replace with your backend URL
 
 // Get the stored token (assuming you store it in localStorage)
 // const getAuthToken = () => {
@@ -17,11 +16,11 @@ import axios from 'axios';
 const getRoutes = async () => {
   try {
     const response = await axios.get(`${config.serverUrl}/routes`,
-    {
-      headers:{
-        Authorization : token
-      }
-    });
+      {
+        headers: {
+          Authorization: token
+        }
+      });
     return response.data;
   } catch (error) {
     console.error("Error fetching routes:", error);
@@ -32,13 +31,28 @@ const getRoutes = async () => {
 export { getRoutes };
 const token = `Bearer ${localStorage.getItem("token")}`;
 // Add a new route
+// export const addRoute = async (routeData) => {
+//   try {
+//     const response = await api.post(`${config.serverUrl}/routes`, routeData
+
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error adding route:', error);
+//     throw error;
+//   }
+// };
+
 export const addRoute = async (routeData) => {
   try {
+
     const response = await api.post(`${config.serverUrl}/routes`, routeData, {
       headers: {
         Authorization: token,
+        'Content-Type': 'application/json; charset=utf-8',
       },
     });
+
     return response.data;
   } catch (error) {
     console.error("Error adding route:", error);
