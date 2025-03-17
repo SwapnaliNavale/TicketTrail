@@ -1,5 +1,8 @@
 package com.tickettrail.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -75,5 +78,14 @@ public class UserServiceImpl implements UserService {
 		                .orElseThrow(() -> new ResourceNotFoundException("Invalid User ID!"));
 		        return modelMapper.map(user, UserDTO.class);
 		    }
+
+			@Override
+			public List<UserDTO> getAllUsers() {
+				// TODO Auto-generated method stub
+				List<User> users = userRepository.findAll();
+				return users.stream()
+		                .map(user -> modelMapper.map(user, UserDTO.class))
+		                .collect(Collectors.toList());
+			}
 
 }

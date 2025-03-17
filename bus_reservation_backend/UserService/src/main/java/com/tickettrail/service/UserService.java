@@ -1,5 +1,7 @@
 package com.tickettrail.service;
 
+import java.util.List;
+
 import com.tickettrail.dto.ApiResponse;
 import com.tickettrail.dto.AuthRequest;
 import com.tickettrail.dto.AuthResponse;
@@ -15,5 +17,6 @@ public interface UserService {
 		ApiResponse<String> signUp(@Valid UserDTO dto);
 		UserDTO getUserDetails(Long userId);
 		void signOut(String token);
+		List<UserDTO> getAllUsers();
 		
 }

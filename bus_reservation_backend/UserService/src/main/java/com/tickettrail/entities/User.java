@@ -46,8 +46,8 @@ public class User extends BaseEntity {
 	
 	private LocalDate dob;
 	
-	@Column(length = 25, unique = true) // adds unique constraint
-	private Long mobileNo;
+	@Column(name = "mobile_no" , length = 15, unique = true) // adds unique constraint
+	private String mobileNo;
 	
 	@Column
 	private int age;
@@ -81,7 +81,7 @@ public class User extends BaseEntity {
     private List<Bus> managedBuses;
     
 public User(String firstName, String lastName, String email, String password, String confirmPassword, LocalDate dob,
-		Long mobileNo, int age, Gender gender, Address userAddress) {
+		String mobileNo, int age, Gender gender, Address userAddress) {
 	super();
 	this.firstName = firstName;
 	this.lastName = lastName;

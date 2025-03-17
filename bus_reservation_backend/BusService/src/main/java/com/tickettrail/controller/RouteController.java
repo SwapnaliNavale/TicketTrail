@@ -11,8 +11,49 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//@RestController
+//@RequestMapping("/routes")
+//public class RouteController {
+//
+//    @Autowired
+//    private RouteService routeService;
+//
+//    @PostMapping
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public ResponseEntity<ApiResponse<RouteResponseDTO>> createRoute(@RequestBody RouteRequestDTO dto) {
+//        return ResponseEntity.ok(ApiResponse.success(routeService.createRoute(dto), "Route created successfully"));
+//    }
+//
+//    @GetMapping("/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public ResponseEntity<ApiResponse<RouteResponseDTO>> getRouteById(@PathVariable Long id) {
+//        return ResponseEntity.ok(ApiResponse.success(routeService.getRouteById(id)));
+//    }
+//
+//    @GetMapping
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public ResponseEntity<ApiResponse<List<RouteResponseDTO>>> getAllRoutes() {
+//        return ResponseEntity.ok(ApiResponse.success(routeService.getAllRoutes()));
+//    }
+//
+//    @PutMapping("/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public ResponseEntity<ApiResponse<String>> updateRoute(@PathVariable Long id, @RequestBody RouteRequestDTO dto) {
+//        routeService.updateRoute(id, dto);
+//        return ResponseEntity.ok(ApiResponse.success("Route updated successfully"));
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public ResponseEntity<ApiResponse<String>> deleteRoute(@PathVariable Long id) {
+//        routeService.deleteRoute(id);
+//        return ResponseEntity.ok(ApiResponse.success("Route deleted successfully"));
+//    }
+//}
+
+
 @RestController
-@RequestMapping("/routes")
+@RequestMapping("/api/routes")
 public class RouteController {
 
     @Autowired
@@ -25,22 +66,19 @@ public class RouteController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<RouteResponseDTO>> getRouteById(@PathVariable Long id) {
         return ResponseEntity.ok(ApiResponse.success(routeService.getRouteById(id)));
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<List<RouteResponseDTO>>> getAllRoutes() {
         return ResponseEntity.ok(ApiResponse.success(routeService.getAllRoutes()));
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<String>> updateRoute(@PathVariable Long id, @RequestBody RouteRequestDTO dto) {
-        routeService.updateRoute(id, dto);
-        return ResponseEntity.ok(ApiResponse.success("Route updated successfully"));
+    public ResponseEntity<ApiResponse<RouteResponseDTO>> updateRoute(@PathVariable Long id, @RequestBody RouteRequestDTO dto) {
+        return ResponseEntity.ok(ApiResponse.success(routeService.updateRoute(id, dto), "Route updated successfully"));
     }
 
     @DeleteMapping("/{id}")
